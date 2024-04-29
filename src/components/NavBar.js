@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
 import { inject } from 'mobx-react';
 import { makeStyles, Button } from '@material-ui/core';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   navbar: {
@@ -31,12 +32,15 @@ const NavBar = ({ authStore }) => {
   const auth0 = useAuth0();
   const { loginWithRedirect, logout } = auth0;
   const isAuthenticated = authStore.token;
+  const history = useHistory();
 
   const classes = useStyles();
 
   return (
     <div className={classes.navbar}>
-      <div className={classes.header}>
+      <div style={{cursor: 'pointer'}} onClick={() => {
+        history.push("/")
+      }} className={classes.header}>
         <h1 style={{ fontSize: 14, color: 'white' }}>THE AUCTION HOUSE</h1>
       </div>
       <div className={classes.loginLogoutContainer}>
